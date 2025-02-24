@@ -1,0 +1,26 @@
+<mat-card class="login-card">
+    <mat-card-content>
+      <form class="example-form" [formGroup]="loginForm">
+        <table class="example-full-width" cellspacing="0">
+          <tr>
+            <td>
+              <mat-form-field class="example-full-width">
+                <input matInput placeholder="username" formControlName="username" name="username" data-cy="username" required>
+              </mat-form-field>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <mat-form-field class="example-full-width">
+                <input matInput placeholder="Password" formControlName="password" type="password" data-cy="password" name="password" required>
+              </mat-form-field>
+            </td>
+          </tr>
+        </table>
+      </form>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-raised-button (click)="submit()" data-cy="login-btn" color="primary">Login</button>
+    </mat-card-actions>
+  </mat-card>
+  

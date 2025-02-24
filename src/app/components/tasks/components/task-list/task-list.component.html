@@ -1,0 +1,62 @@
+<div class="task-container">
+  <mat-card *ngFor="let task of tasks$ | async" class="task-card">
+    <div class="task-header">
+      <mat-card-title class="task-title task-item" data-cy="task-item" (click)="navigateToTaskDetail(task.id)">
+        {{ task.title }}
+      </mat-card-title>
+      <div class="task-actions">
+        <button class="edit-btn" data-cy="edit-button"  mat-icon-button color="accent" (click)="openEditModal(task)">
+          <mat-icon>edit</mat-icon>
+        </button>
+        <button class="delete-btn" mat-icon-button color="warn" (click)="deleteTask(task.id)">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </div>
+    </div>
+    <mat-card-content>{{ task.description }}</mat-card-content>
+  </mat-card>
+</div>
+
+<div class="create-task-container">
+  <button mat-raised-button color="primary" class="create-task-button" (click)="openCreateModal()">
+    Create New Task
+  </button>
+</div>
+
+<div *ngIf="showEditModal" class="modal-overlay">
+  <div class="modal-content">
+    <h2>{{ isEditing ? 'Edit Task' : 'Create New Task' }}</h2>
+    <form [formGroup]="taskForm">
+      <mat-form-field class="full-width">
+        <mat-label>Title</mat-label>
+        <input matInput formControlName="title" required />
+      </mat-form-field>
+
+      <mat-form-field class="full-width">
+        <mat-label>Description</mat-label>
+        <textarea matInput formControlName="description" required></textarea>
+      </mat-form-field>
+
+      <mat-form-field class="full-width">
+        <mat-label>Status</mat-label>
+        <mat-select formControlName="status">
+          <mat-option value="Pending">Pending</mat-option>
+          <mat-option value="Completed">Completed</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field class="full-width">
+        <mat-label>Due Date</mat-label>
+        <input matInput type="date" formControlName="dueDate" required />
+      </mat-form-field>
+
+      <div class="modal-actions">
+        <button mat-raised-button color="warn" (click)="closeEditModal()">Cancel</button>
+        <button class="create-update-btn" mat-raised-button color="primary" (click)="isEditing ? updateTask() : addTask()" 
+                [disabled]="taskForm.invalid">
+          {{ isEditing ? 'Update' : 'Create' }}
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

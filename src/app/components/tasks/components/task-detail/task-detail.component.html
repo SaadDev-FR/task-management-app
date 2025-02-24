@@ -1,0 +1,12 @@
+<mat-card *ngIf="task">
+    <mat-card-title>{{ task.title }}</mat-card-title>
+    <mat-card-content>
+      <p>{{ task.description }}</p>
+      <p><strong>Status:</strong> {{ task.status }}</p>
+      <p><strong>Due Date:</strong> {{ task.dueDate | date }}</p>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-button (click)="goBack()">Back</button>
+    </mat-card-actions>
+  </mat-card>
+  
